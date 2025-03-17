@@ -69,7 +69,12 @@ class _LoginState extends State<Login> {
                     ),
                     SizedBox(height: 30),
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Home()),
+                        );
+                      },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: Colors.white),
                         padding: EdgeInsets.symmetric(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskmangament/views/generaldata.dart';
+import 'package:taskmangament/views/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Generaldata(),
+      home: const Login(),
     );
   }
 }

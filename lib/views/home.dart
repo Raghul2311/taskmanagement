@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskmangament/utils/style.dart';
+import 'package:taskmangament/views/task.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -9,40 +9,49 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String _selectedMenuItem = "Home"; // Track the selected item
+
+  void _onMenuItemTap(String item) {
+    setState(() {
+      _selectedMenuItem = item; // Update selected item
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Row(
         children: [
-          // Side bar........
+          // Side bar
           Container(
             width: screenWidth * 0.2,
             height: screenHeight,
             color: Colors.blue.shade900,
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Home", style: sidebarTextStyle),
+                  _buildSidebarItem("Home"),
                   SizedBox(height: 20),
-                  Text("Sheduled Task", style: sidebarTextStyle),
+                  _buildSidebarItem("Scheduled Task"),
                   SizedBox(height: 20),
-                  Text("Completed Tasks", style: sidebarTextStyle),
+                  _buildSidebarItem("Completed Tasks"),
                   SizedBox(height: 20),
-                  Text("With-held Tasks", style: sidebarTextStyle),
+                  _buildSidebarItem("With-held Tasks"),
                 ],
               ),
             ),
           ),
 
-          // Main Dashboard section..............
+          // Main Dashboard section
           Expanded(
             child: Column(
               children: [
-                // Top Bar.........
+                // Top Bar
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 10,
@@ -63,20 +72,27 @@ class _HomeState extends State<Home> {
                         Row(
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Task(),
+                                  ),
+                                );
+                              },
                               child: Text("+ Add Task"),
                             ),
                             SizedBox(width: 16),
 
-                            // User profile menu button..............
+                            // User profile menu button
                             PopupMenuButton<String>(
                               onSelected: (value) {
                                 if (value == "Home") {
-                                  //navigate to home page
+                                  // Navigate to home page
                                 } else if (value == "Setting") {
-                                  //navigate to setting page
+                                  // Navigate to setting page
                                 } else if (value == "SignOut") {
-                                  //perform sign out action
+                                  // Perform sign out action
                                 }
                               },
                               itemBuilder:
@@ -106,7 +122,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
 
-                // Task list (Dashboard Table)................
+                // Task list (Dashboard Table)
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.all(8),
@@ -204,6 +220,28 @@ class _HomeState extends State<Home> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  // side bar widget
+  Widget _buildSidebarItem(String title) {
+    return GestureDetector(
+      onTap: () => _onMenuItemTap(title),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: _selectedMenuItem == title ? Colors.black : Colors.transparent,
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: _selectedMenuItem == title ? Colors.white : Colors.white70,
+          ),
+        ),
       ),
     );
   }

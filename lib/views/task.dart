@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taskmangament/utils/appcolors.dart';
 import 'package:taskmangament/utils/spacerwidget.dart';
+import 'package:taskmangament/views/generaldata.dart';
 
 class Task extends StatefulWidget {
   const Task({super.key});
@@ -138,7 +139,14 @@ class _TaskState extends State<Task> {
                               fontSize: 10,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Generaldata(),
+                              ),
+                            );
+                          },
                           child: Text(
                             'SUBMIT',
                             style: TextStyle(
@@ -149,13 +157,12 @@ class _TaskState extends State<Task> {
                           ),
                         ),
                         SpacerWidget.size16w,
-                         ElevatedButton(
+                        ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.grey,
                             textStyle: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,
-                              
                             ),
                           ),
                           onPressed: () {},
